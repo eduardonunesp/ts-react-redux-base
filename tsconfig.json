@@ -9,17 +9,20 @@
     "experimentalDecorators": true,
     "noImplicitAny": false,
     "removeComments": false,
-    "sourceMap": false,
-    "inlineSourceMap": true,
+    "sourceMap": true,
     "noEmitHelpers": true
   },
   "awesomeTypescriptLoaderOptions": {
     "useBabel": true,
     "useCache": false,
-    "emitRequireType": false
+    "emitRequireType": false,
+    "forkChecker": true
   },
   "exclude": [
     "node_modules",
     "dist"
-  ]
+  ],
+  "atom": { 
+    "rewriteTsconfig": false 
+  }
 }
