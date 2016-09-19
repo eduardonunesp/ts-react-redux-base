@@ -2,13 +2,16 @@ import { CONFIGURE } from '../constants'
 import { fromJS } from 'immutable'
 
 const INITIAL_STATE = fromJS({
-  title: 'React/Redux/TS'
+  title: 'React/Redux/TS',
+  inverse: true
 })
 
-function config(state = INITIAL_STATE, action = { type: '' }): any {
+function config(state = INITIAL_STATE, action): any {
   switch (action.type) {
     case CONFIGURE:
-      return state
+      return state.merge(fromJS({
+        inverse: action.payload.inverse
+      }))
     default:
       return state
   }

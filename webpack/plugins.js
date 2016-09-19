@@ -4,7 +4,7 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const sourceMap = process.env.NODE_ENV !== 'production'
+const sourceMap = process.env.TEST || process.env.NODE_ENV !== 'production'
   ? [new webpack.SourceMapDevToolPlugin({ filename: null, test: /\.tsx?$/ })]
   : [];
 
@@ -18,8 +18,23 @@ const basePlugins = [
     template: './src/index.html',
     inject: 'body',
   }),
-  new webpack.NoErrorsPlugin()
+  new webpack.NoErrorsPlugin(),
+  new webpack.ProvidePlugin({
+    $: "jquery",
+    jQuery: "jquery"
+  })
 ].concat(sourceMap);
+
+const devPlugins = []
+
+const prodPlugins = [
+  new webpack.optimize.UglifyJsPlugin({
+    compress: {
+      warnings: false,
+    },
+  })
+];
 
 module.exports = basePlugins
   .concat(process.env.NODE_ENV === 'production' ? prodPlugins : [])
+  .concat(process.env.NODE_ENV === 'development' ? devPlugins : [])

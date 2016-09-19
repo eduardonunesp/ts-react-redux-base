@@ -9,3 +9,4 @@ export const LOGOUT_USER = 'App/LOGOUT_USER'
 export const FORM_RESET = 'redux-form/RESET'
 
 export const CONFIGURE = 'App/CONFIGURE'
+export const GOTO_PAGE = 'App/GOTO_PAGE'

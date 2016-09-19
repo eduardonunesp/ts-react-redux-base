@@ -1,9 +1,26 @@
 'use strict'
 
+exports.tslint = {
+  test: /\.tsx?$/,
+  loader: 'tslint',
+  exclude: /node_modules/,
+}
+
 exports.tsx = { 
   test: /\.tsx?$/,
   loader: 'awesome-typescript-loader',
   exclude: '/node_modules/'
+}
+
+exports.html = {
+  test: /\.html$/,
+  loader: 'raw',
+  exclude: /node_modules/,
+}
+
+exports.json = {
+  test: /\.json$/,
+  loader: 'json',
 }
 
 exports.css = {

@@ -1,5 +1,6 @@
 import 'babel-polyfill'
 import 'ts-helpers'
+import 'bootstrap/dist/css/bootstrap.css'
 import './styles/index.scss'
 
 import * as React from 'react'
@@ -23,6 +24,7 @@ const store = configureStore({})
 const history = syncHistoryWithStore(browserHistory, store)
 
 if (!__TEST__) {
+  const appContainer = document.getElementById('appRoot')
   ReactDOM.render(
     <div>
       <Provider store={store}>
@@ -31,6 +33,6 @@ if (!__TEST__) {
         </Router >
       </Provider>
     </div>,
-    document.getElementById('appRoot')
+    appContainer
   )
 }

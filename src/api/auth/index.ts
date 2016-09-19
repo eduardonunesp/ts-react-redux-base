@@ -8,6 +8,6 @@ export function login(user): any {
   return new Promise((resolve, reject) => {
     return post('/auth/login', user)
     .then(json => resolve(json.meta))
-    .then(null, (err) => reject(new Error(LOGIN_ERR_MSG)))
+    .then(null, () => reject(new Error(LOGIN_ERR_MSG)))
   })
 }

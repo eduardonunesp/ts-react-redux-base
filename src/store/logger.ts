@@ -7,7 +7,7 @@ const logger = createLogger({
   stateTransformer: (state) => {
     return immutableToJS(state)
   },
-  predicate: (getState, { type }) => {
+  predicate: (_getState, { type }) => {
     return type !== 'redux-form/BLUR' &&
            type !== 'redux-form/CHANGE' &&
            type !== 'redux-form/FOCUS' &&

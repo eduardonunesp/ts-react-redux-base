@@ -1,8 +1,8 @@
 'use strict'
 
 const path = require('path')
-const plugins = require('./webpack.plugins')
-const loaders = require('./webpack.loaders')
+const plugins = require('./webpack/plugins')
+const loaders = require('./webpack/loaders')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 const applicationEntries = process.env.NODE_ENV === 'development'
@@ -10,22 +10,14 @@ const applicationEntries = process.env.NODE_ENV === 'development'
   : []
   
 module.exports = {
-  devServer: {
-    historyApiFallback: true
-  },
-
-  entry: [
-    'webpack-dev-server/client?http://localhost:8000',
-    'webpack/hot/only-dev-server',
-    './src/index.tsx'
-  ],
+  entry: [ './src/index.tsx' ].concat(applicationEntries),
 
   output: {
     path: path.join(__dirname, 'dist'),
     filename: '[name].[hash].js',
     publicPath: '/',
     sourceMapFilename: '[name].[hash].js.map',
-    chunkFilename: '[id].chunk.js'
+    chunkFilename: '[id].chunk.js',
   },
 
   devtool: process.env.NODE_ENV === 'production' ?
@@ -44,6 +36,11 @@ module.exports = {
     ],
   },
 
+  devServer: {
+    historyApiFallback: { index: '/' },
+    // proxy: Object.assign({}, proxy(), { '/api/*': 'http://localhost:3000' }),
+  },
+
   plugins: plugins,
 
   module: {
@@ -59,5 +56,11 @@ module.exports = {
       loaders.gif,
       loaders.png
     ]
-  }
+  },
+
+  externals: {
+    'react/lib/ReactContext': 'window',
+    'react/lib/ExecutionEnvironment': true,
+    'react/addons': true,
+  },
 }

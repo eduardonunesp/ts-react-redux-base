@@ -32,7 +32,7 @@
             true,
             "check-parameters",
             "react",
-            {"ignore-pattern": "React"}
+            {"ignore-pattern": "React|^_"}
         ],
         "no-use-before-declare": true,
         "no-var-keyword": true,
